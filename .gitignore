@@ -2,7 +2,11 @@
 *.log
 
 # Директория node_modules
-node_modules/
+.node_modules/
 
 # Скомпилированные файлы
 /dist
+
+.idea
+.vscode
+.data
