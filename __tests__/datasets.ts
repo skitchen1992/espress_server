@@ -3,6 +3,7 @@ export const dataSet1 = {
   author: 'Alice Johnson',
   availableResolutions: ['P144', 'P360'],
 };
+
 export const dataSet2 = {
   id: 1,
   title: 'Introduction to JSON',
@@ -13,3 +14,25 @@ export const dataSet2 = {
   publicationDate: '2024-04-23T19:00:00.000Z',
   availableResolutions: ['P144', 'P360'],
 };
+
+export const dataSet3 = {
+  title: 'JSON and APIs',
+  author: 'Carol White',
+  availableResolutions: ['P144', 'P360', 'P1080'],
+};
+
+export const dataSet4 = {
+  author: 'Carol White',
+  availableResolutions: ['P144', 'P360', 'P10809'],
+};
+
+export const dataSetError = {
+  errorsMessages: [
+    {
+      message: 'Require field',
+      field: 'title',
+    },
+  ],
+};
+
+

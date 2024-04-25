@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "concurrently \"yarn nodemon --inspect src/index.ts\" \"watch\"",
     "watch": "tsc -w",
-    "jest": "jest -i"
+    "jest": "jest -i",
+    "test": "yarn jest"
   },
   "dependencies": {
     "cors": "2.8.5",

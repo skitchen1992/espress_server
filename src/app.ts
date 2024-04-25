@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import { SETTINGS } from './settings';
 import DB from './db/db';
-import { inputValidation } from '../__tests__/validations';
+import { FLIGHT_OUT_STATUSES, inputValidation } from './validations';
 
 export const app = express();
 
@@ -25,7 +25,7 @@ app.get(`${SETTINGS.PATH.VIDEOS}/:id`, (req: Request, res: Response) => {
   const id = req.params.id;
 
   const video = db.getVideo(Number(id));
-  console.log('video', video);
+
   if (video) {
     res.status(200).send(video);
   } else {
@@ -35,11 +35,23 @@ app.get(`${SETTINGS.PATH.VIDEOS}/:id`, (req: Request, res: Response) => {
 
 app.post(SETTINGS.PATH.VIDEOS, (req: Request, res: Response) => {
   const errors = inputValidation(req.body);
-  const newVideo = req.body;
 
-  console.log(req.body);
+  if(!errors){
+    const newVideo = {
+      ...req.body,
+      id: Date.now() + Math.random(),
+      canBeDownloaded: true,
+      minAgeRestriction: null,
+      createdAt: new Date().toISOString(),
+      publicationDate: new Date().toISOString(),
+    }
 
-  res.status(201).json({ test: req.body });
+    db.addVideo(newVideo)
+
+    res.status(201).send(newVideo);
+  }else{
+    res.status(400).send(errors);
+  }
 });
 
 app.put(`${SETTINGS.PATH.VIDEOS}/:id`, (req: Request, res: Response) => {
