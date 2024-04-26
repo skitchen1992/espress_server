@@ -90,11 +90,11 @@ export default class DB {
   public deleteVideo(id: number) {
     const videoIndex = this.findIndex(id);
 
-    if (videoIndex === -1) {
-      return null;
-    } else {
+    if (videoIndex !== -1) {
       this.db.videos.splice(videoIndex, 1);
-      return;
+      return true
+    } else {
+      return false
     }
   }
 

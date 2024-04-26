@@ -77,6 +77,17 @@ app.put(`${SETTINGS.PATH.VIDEOS}/:id`, (req: Request, res: Response) => {
 });
 
 app.delete(`${SETTINGS.PATH.VIDEOS}/:id`, (req: Request, res: Response) => {
-  const a = 'Hello Word!';
-  res.send(a);
+  const id = Number(req.params.id);
+  const updated = db.deleteVideo(id);
+
+  if (updated) {
+    res.status(204).send();
+  } else {
+    res.status(404).send({
+      errorsMessages: [{
+        message: 'Video not found',
+        field: '',
+      }],
+    });
+  }
 });

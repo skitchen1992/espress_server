@@ -35,4 +35,35 @@ export const dataSetError = {
   ],
 };
 
+export const requestDataPut = {
+  title: 'TEST',
+  author: 'TEST',
+  canBeDownloaded: false,
+  minAgeRestriction: 2,
+  publicationDate: '2025-04-23T19:00:00.000Z',
+  availableResolutions: null,
+};
+
+export const updatedRequestDataPut = {
+  id: 1,
+  createdAt: '2024-04-23T19:00:00.000Z',
+  title: 'TEST',
+  author: 'TEST',
+  canBeDownloaded: false,
+  minAgeRestriction: 2,
+  publicationDate: '2025-04-23T19:00:00.000Z',
+  availableResolutions: null,
+};
+
+export const requestDataPutError = {
+  author: 'TEST',
+  canBeDownloaded: false,
+  minAgeRestriction: 43,
+  publicationDate: '2025-04-23T19:00:00.000Z',
+  availableResolutions: null,
+};
+
+export const dataSetErrorPut = {
+  errorsMessages: [{ message: 'Cannot be more than 18', field: 'minAgeRestriction' }],
+};
 

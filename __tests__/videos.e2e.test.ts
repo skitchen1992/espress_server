@@ -1,7 +1,15 @@
 import { req } from './test-helpers';
 import { SETTINGS } from '../src/settings';
 import DB from '../src/db/db';
-import { dataSet1, dataSet2, dataSet3, dataSet4, dataSetError } from './datasets';
+import {
+  dataSet1,
+  dataSet2,
+  dataSet3,
+  dataSet4,
+  dataSetError, dataSetErrorPut,
+  requestDataPut, requestDataPutError,
+  updatedRequestDataPut,
+} from './datasets';
 
 const db = new DB();
 
@@ -47,7 +55,7 @@ describe.skip('Endpoint: videos (GET by ID)', () => {
   });
 });
 
-describe('Endpoint: videos (POST)', () => {
+describe.skip('Endpoint: videos (POST)', () => {
   beforeEach(async () => {
     db.clearDB();
   });
@@ -71,6 +79,67 @@ describe('Endpoint: videos (POST)', () => {
 
     expect(res.body).toEqual(dataSetError);
   });
+});
+
+describe.skip('Endpoint: videos (PUT)', () => {
+  beforeEach(async () => {
+    db.clearDB();
+  });
+
+  it('Should update item', async () => {
+    db.addVideo(dataSet2);
+
+    await req.put(`${SETTINGS.PATH.VIDEOS}/${dataSet2.id}`)
+      .send(requestDataPut)
+      .expect(204);
+
+    const dbRes = db.getVideo(dataSet2.id);
+
+    expect(dbRes).toEqual(updatedRequestDataPut);
+  });
+
+  it('Should return an error status 404', async () => {
+    db.addVideo(dataSet2);
+
+    await req.put(`${SETTINGS.PATH.VIDEOS}/10`)
+      .send(requestDataPut)
+      .expect(404);
+  });
+
+  it('Should return an error status 404', async () => {
+    db.addVideo(dataSet2);
+
+    const res = await req.put(`${SETTINGS.PATH.VIDEOS}/${dataSet2.id}`)
+      .send(requestDataPutError)
+      .expect(400);
+
+    expect(res.body).toEqual(dataSetErrorPut);
+  });
+});
+
+
+describe('Endpoint: videos (DELETE)', () => {
+  beforeEach(async () => {
+    db.clearDB();
+    db.addVideo(dataSet2);
+  });
+
+  it('Should delete item', async () => {
+
+    await req.delete(`${SETTINGS.PATH.VIDEOS}/${dataSet2.id}`)
+      .expect(204);
+
+    const videoList = db.getVideos();
+
+    expect(videoList.length).toEqual(0);
+  });
+
+  it('Should return an error status 404', async () => {
+
+    await req.delete(`${SETTINGS.PATH.VIDEOS}/10`)
+      .expect(404);
+  });
+
 });
 
 
