@@ -1,6 +1,7 @@
 import express from 'express';
 import { SETTINGS } from './utils/settings';
 import {
+  deleteAllVideoController,
   deleteVideoController,
   getVideoByIDController,
   getVideosController,
@@ -26,3 +27,5 @@ app.post(SETTINGS.PATH.VIDEOS, postVideoController);
 app.put(`${SETTINGS.PATH.VIDEOS}/:id`, putVideoController);
 
 app.delete(`${SETTINGS.PATH.VIDEOS}/:id`, deleteVideoController);
+
+app.delete(`${SETTINGS.PATH.TESTING.ALL_DATA}`, deleteAllVideoController);

@@ -52,7 +52,7 @@ export const putVideoController = (req: Request, res: Response) => {
     const updated = db.updateVideo(id, req.body);
 
     if (updated) {
-      res.sendStatus(204)
+      res.sendStatus(204);
     } else {
       res.sendStatus(404);
     }
@@ -65,9 +65,20 @@ export const deleteVideoController = (req: Request, res: Response) => {
   const id = Number(req.params.id);
   const updated = db.deleteVideo(id);
 
+  // if (updated) {
+  //   res.status(204).send();
+  // } else {
+  //   res.status(404).send();
+  // }
+
   if (updated) {
-    res.status(204).send();
+    res.sendStatus(204)
   } else {
-    res.status(404).send();
+    res.sendStatus(404)
   }
+};
+
+export const deleteAllVideoController = (req: Request, res: Response) => {
+  db.clearDB();
+  res.sendStatus(204);
 };
