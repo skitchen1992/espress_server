@@ -13,7 +13,7 @@ import {
 
 const db = new DB();
 
-describe.skip('Endpoint: videos (GET)', () => {
+describe('Endpoint: videos (GET)', () => {
   beforeEach(async () => {
     db.clearDB();
   });
@@ -34,7 +34,7 @@ describe.skip('Endpoint: videos (GET)', () => {
   });
 });
 
-describe.skip('Endpoint: videos (GET by ID)', () => {
+describe('Endpoint: videos (GET by ID)', () => {
   beforeEach(async () => {
     db.clearDB();
   });
@@ -55,7 +55,7 @@ describe.skip('Endpoint: videos (GET by ID)', () => {
   });
 });
 
-describe.skip('Endpoint: videos (POST)', () => {
+describe('Endpoint: videos (POST)', () => {
   beforeEach(async () => {
     db.clearDB();
   });
@@ -81,7 +81,7 @@ describe.skip('Endpoint: videos (POST)', () => {
   });
 });
 
-describe.skip('Endpoint: videos (PUT)', () => {
+describe('Endpoint: videos (PUT)', () => {
   beforeEach(async () => {
     db.clearDB();
   });

@@ -12,6 +12,7 @@ export interface IVideo {
 export type DBType = {
   videos: IVideo[];
 };
+
 const db: DBType = {
   videos: [
     // {

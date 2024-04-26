@@ -23,7 +23,7 @@ export const dataSet3 = {
 
 export const dataSet4 = {
   author: 'Carol White',
-  availableResolutions: ['P144', 'P360', 'P10809'],
+  availableResolutions: ['P144', 'P360', 'P1080'],
 };
 
 export const dataSetError = {
