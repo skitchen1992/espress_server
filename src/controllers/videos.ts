@@ -52,14 +52,9 @@ export const putVideoController = (req: Request, res: Response) => {
     const updated = db.updateVideo(id, req.body);
 
     if (updated) {
-      res.status(204).send();
+      res.sendStatus(204)
     } else {
-      res.status(404).send({
-        errorsMessages: [{
-          message: 'Video not found',
-          field: '',
-        }],
-      });
+      res.sendStatus(404);
     }
   } else {
     res.status(400).send(errors);

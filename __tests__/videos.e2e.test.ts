@@ -106,7 +106,7 @@ describe('Endpoint: videos (PUT)', () => {
       .expect(404);
   });
 
-  it('Should return an error status 404', async () => {
+  it('Should return an error status 400', async () => {
     db.addVideo(dataSet2);
 
     const res = await req.put(`${SETTINGS.PATH.VIDEOS}/${dataSet2.id}`)
