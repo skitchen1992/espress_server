@@ -27,14 +27,14 @@ export const inputValidation = (data: IData, method?: 'POST') => {
     errorsMessages: [],
   };
 
-  if (method === 'POST') {
+
     if (!data.title) {
       errors.errorsMessages.push({ message: 'Require field', field: 'title' });
     }
     if (!data.author) {
       errors.errorsMessages.push({ message: 'Require field', field: 'author' });
     }
-  }
+
 
 
   for (const key in data) {

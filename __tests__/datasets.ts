@@ -64,6 +64,9 @@ export const requestDataPutError = {
 };
 
 export const dataSetErrorPut = {
-  errorsMessages: [{ message: 'Cannot be more than 18', field: 'minAgeRestriction' }],
+  errorsMessages: [
+    { message: 'Require field', field: 'title' },
+    { message: 'Cannot be more than 18', field: 'minAgeRestriction' }
+  ],
 };
 
