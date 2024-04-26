@@ -33,7 +33,7 @@ export const postVideoController = (req: Request, res: Response) => {
     const newVideo = {
       ...req.body,
       id: Date.now() + Math.random(),
-      canBeDownloaded: true,
+      canBeDownloaded: false,
       minAgeRestriction: null,
       createdAt: new Date().toISOString(),
       publicationDate,
