@@ -27,13 +27,16 @@ export const postVideoController = (req: Request, res: Response) => {
   const errors = inputValidation(req.body, 'POST');
 
   if (!errors) {
+
+    const publicationDate = new Date(new Date().getTime() + 86400000).toISOString();
+
     const newVideo = {
       ...req.body,
       id: Date.now() + Math.random(),
       canBeDownloaded: true,
       minAgeRestriction: null,
       createdAt: new Date().toISOString(),
-      publicationDate: new Date().toISOString(),
+      publicationDate,
     };
 
     db.addVideo(newVideo);

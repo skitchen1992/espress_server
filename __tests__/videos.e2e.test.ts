@@ -113,7 +113,6 @@ describe('Endpoint: videos (PUT)', () => {
     const res = await req.put(`${SETTINGS.PATH.VIDEOS}/${dataSet2.id}`)
       .send(requestDataPutError)
       .expect(400);
-    console.log("res.body", res.body);
     expect(res.body).toEqual(dataSetErrorPut);
   });
 });
