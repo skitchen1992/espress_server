@@ -5,6 +5,6 @@ config(); // добавление переменных из файла .env в p
 export const SETTINGS = {
   PORT: process.env.PORT,
   PATH: {
-    VIDEOS: '/hometask_01/api/videos',
+    VIDEOS: '/videos',
   },
 };
