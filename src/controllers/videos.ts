@@ -65,12 +65,6 @@ export const deleteVideoController = (req: Request, res: Response) => {
   const id = Number(req.params.id);
   const updated = db.deleteVideo(id);
 
-  // if (updated) {
-  //   res.status(204).send();
-  // } else {
-  //   res.status(404).send();
-  // }
-
   if (updated) {
     res.sendStatus(204)
   } else {

@@ -38,7 +38,7 @@ export const inputValidation = (data: IData, method?: 'POST') => {
 
 
   for (const key in data) {
-    if (key === 'title') {
+    if (key === 'title' && data[key]) {
       if (typeof data[key] !== 'string') {
         errors.errorsMessages.push({ message: 'Incorrect type', field: key });
       }
@@ -47,7 +47,7 @@ export const inputValidation = (data: IData, method?: 'POST') => {
       }
     }
 
-    if (key === 'author') {
+    if (key === 'author' && data[key]) {
       if (typeof data[key] !== 'string') {
         errors.errorsMessages.push({ message: 'Incorrect type', field: key });
         return;
