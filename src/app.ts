@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import { SETTINGS } from './settings';
 import DB from './db/db';
-import { FLIGHT_OUT_STATUSES, inputValidation } from './validations';
+import { inputValidation } from './validations';
 
 export const app = express();
 
@@ -34,9 +34,9 @@ app.get(`${SETTINGS.PATH.VIDEOS}/:id`, (req: Request, res: Response) => {
 });
 
 app.post(SETTINGS.PATH.VIDEOS, (req: Request, res: Response) => {
-  const errors = inputValidation(req.body);
+  const errors = inputValidation(req.body, 'POST');
 
-  if(!errors){
+  if (!errors) {
     const newVideo = {
       ...req.body,
       id: Date.now() + Math.random(),
@@ -44,19 +44,36 @@ app.post(SETTINGS.PATH.VIDEOS, (req: Request, res: Response) => {
       minAgeRestriction: null,
       createdAt: new Date().toISOString(),
       publicationDate: new Date().toISOString(),
-    }
+    };
 
-    db.addVideo(newVideo)
+    db.addVideo(newVideo);
 
     res.status(201).send(newVideo);
-  }else{
+  } else {
     res.status(400).send(errors);
   }
 });
 
 app.put(`${SETTINGS.PATH.VIDEOS}/:id`, (req: Request, res: Response) => {
-  const a = 'Hello Word!';
-  res.send(a);
+  const id = Number(req.params.id);
+  const errors = inputValidation(req.body);
+
+  if (!errors) {
+    const updated = db.updateVideo(id, req.body);
+
+    if (updated) {
+      res.status(204).send();
+    } else {
+      res.status(404).send({
+        errorsMessages: [{
+          message: 'Video not found',
+          field: '',
+        }],
+      });
+    }
+  } else {
+    res.status(400).send(errors);  // Send back any validation errors
+  }
 });
 
 app.delete(`${SETTINGS.PATH.VIDEOS}/:id`, (req: Request, res: Response) => {

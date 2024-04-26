@@ -74,17 +74,16 @@ export default class DB {
   public updateVideo(id: number, data: IVideo) {
     const videoIndex = this.findIndex(id);
 
-    if (videoIndex === -1) {
-      return null;
-    } else {
-      this.db.videos[videoIndex] = {
+    if (videoIndex !== -1) {
+       this.db.videos[videoIndex] = {
         ...this.db.videos[videoIndex],
         ...data,
         id: this.db.videos[videoIndex].id,
         createdAt: this.db.videos[videoIndex].createdAt,
       };
-
-      return;
+       return true
+    }else {
+      return false
     }
   }
 
@@ -99,7 +98,7 @@ export default class DB {
     }
   }
 
-  private findIndex(id: number) {
+  public findIndex(id: number) {
     return this.db.videos.findIndex((video) => video.id === id);
   }
 
