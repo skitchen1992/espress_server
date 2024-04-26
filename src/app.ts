@@ -83,11 +83,6 @@ app.delete(`${SETTINGS.PATH.VIDEOS}/:id`, (req: Request, res: Response) => {
   if (updated) {
     res.status(204).send();
   } else {
-    res.status(404).send({
-      errorsMessages: [{
-        message: 'Video not found',
-        field: '',
-      }],
-    });
+    res.status(404).send();
   }
 });
