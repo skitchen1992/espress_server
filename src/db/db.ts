@@ -14,38 +14,7 @@ export type DBType = {
 };
 
 const db: DBType = {
-  videos: [
-    // {
-    //     "id": 1,
-    //     "title": "Introduction to JSON",
-    //     "author": "Alice Johnson",
-    //     "canBeDownloaded": true,
-    //     "minAgeRestriction": null,
-    //     "createdAt": "2024-04-23T19:00:00.000Z",
-    //     "publicationDate": "2024-04-23T19:00:00.000Z",
-    //     "availableResolutions": ["P144", "P360"]
-    // },
-    // {
-    //     "id": 2,
-    //     "title": "Advanced JSON Techniques",
-    //     "author": "Bob Smith",
-    //     "canBeDownloaded": false,
-    //     "minAgeRestriction": 12,
-    //     "createdAt": "2024-04-23T19:05:00.000Z",
-    //     "publicationDate": "2024-04-23T19:05:00.000Z",
-    //     "availableResolutions": ["P240", "P480", "P720"]
-    // },
-    // {
-    //     "id": 3,
-    //     "title": "JSON and APIs",
-    //     "author": "Carol White",
-    //     "canBeDownloaded": true,
-    //     "minAgeRestriction": 16,
-    //     "createdAt": "2024-04-23T19:10:00.000Z",
-    //     "publicationDate": "2024-04-23T19:10:00.000Z",
-    //     "availableResolutions": ["P144", "P360", "P1080"]
-    // }
-  ],
+  videos: [],
 };
 
 export default class DB {
@@ -68,6 +37,7 @@ export default class DB {
       return this.db.videos[videoIndex];
     }
   }
+
   public addVideo(data: IVideo) {
     this.db.videos.push(data);
   }
@@ -76,15 +46,15 @@ export default class DB {
     const videoIndex = this.findIndex(id);
 
     if (videoIndex !== -1) {
-       this.db.videos[videoIndex] = {
+      this.db.videos[videoIndex] = {
         ...this.db.videos[videoIndex],
         ...data,
         id: this.db.videos[videoIndex].id,
         createdAt: this.db.videos[videoIndex].createdAt,
       };
-       return true
-    }else {
-      return false
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -93,9 +63,9 @@ export default class DB {
 
     if (videoIndex !== -1) {
       this.db.videos.splice(videoIndex, 1);
-      return true
+      return true;
     } else {
-      return false
+      return false;
     }
   }
 

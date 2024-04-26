@@ -1,4 +1,4 @@
-import { SETTINGS } from './settings';
+import { SETTINGS } from './utils/settings';
 import { app } from './app';
 
 app.listen(SETTINGS.PORT, () => {

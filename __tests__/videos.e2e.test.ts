@@ -1,5 +1,5 @@
 import { req } from './test-helpers';
-import { SETTINGS } from '../src/settings';
+import { SETTINGS } from '../src/utils/settings';
 import DB from '../src/db/db';
 import {
   dataSet1,
