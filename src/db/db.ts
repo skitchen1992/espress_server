@@ -1,16 +1,8 @@
-export interface IVideo {
-  id?: number;
-  title: string;
-  author: string;
-  canBeDownloaded?: boolean;
-  minAgeRestriction?: number | null;
-  createdAt?: string;
-  publicationDate?: string;
-  availableResolutions?: string[];
-}
+import { VideoViewModel } from '../models/VideoViewModel';
+
 
 export type DBType = {
-  videos: IVideo[];
+  videos: VideoViewModel[];
 };
 
 const db: DBType = {
@@ -38,11 +30,11 @@ export default class DB {
     }
   }
 
-  public addVideo(data: IVideo) {
+  public addVideo(data: VideoViewModel) {
     this.db.videos.push(data);
   }
 
-  public updateVideo(id: number, data: IVideo) {
+  public updateVideo(id: number, data: VideoViewModel) {
     const videoIndex = this.findIndex(id);
 
     if (videoIndex !== -1) {

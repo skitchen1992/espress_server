@@ -1,9 +1,10 @@
+
 interface IErrorsMessages {
   message: string;
   field: string;
 }
 
-interface IErrors {
+export interface IErrors {
   errorsMessages: IErrorsMessages[];
 }
 
@@ -22,7 +23,7 @@ export const FLIGHT_OUT_STATUSES = {
   P2160: 'P2160',
 };
 
-export const inputValidation = (data: IData, method?: 'POST') => {
+export const inputValidation = (data: IData) => {
   const errors: IErrors = {
     errorsMessages: [],
   };
@@ -99,5 +100,5 @@ export const inputValidation = (data: IData, method?: 'POST') => {
   }
 
 
-  return errors.errorsMessages.length > 0 ? errors : null;
+  return errors.errorsMessages.length > 0 ? errors : undefined;
 };

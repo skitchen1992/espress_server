@@ -1,10 +1,13 @@
-import DB, { IVideo } from '../db/db';
+import DB from '../db/db';
 import { Request, Response } from 'express';
-import { inputValidation } from '../utils/validations';
+import { IErrors, inputValidation } from '../utils/validations';
 import { HTTP_STATUSES } from '../utils/consts';
+import { RequestWithBody, RequestWithPrams } from '../types';
+import { CreateVideoModel } from '../models/CreateVideoModel';
+import { VideoViewModel } from '../models/VideoViewModel';
 
 const db = new DB();
-export const getVideosController = (req: Request, res: Response<IVideo[]>) => {
+export const getVideosController = (req: Request, res: Response<VideoViewModel[]>) => {
   const videos = db.getVideos();
 
   if (videos) {
@@ -12,7 +15,7 @@ export const getVideosController = (req: Request, res: Response<IVideo[]>) => {
   }
 };
 
-export const getVideoByIDController = (req: Request, res: Response<IVideo | number>) => {
+export const getVideoByIDController = (req: RequestWithPrams<{ id: string }>, res: Response<VideoViewModel>) => {
   const id = req.params.id;
 
   const video = db.getVideo(Number(id));
@@ -24,8 +27,8 @@ export const getVideoByIDController = (req: Request, res: Response<IVideo | numb
   }
 };
 
-export const postVideoController = (req: Request, res: Response) => {
-  const errors = inputValidation(req.body, 'POST');
+export const postVideoController = (req: RequestWithBody<CreateVideoModel>, res: Response<IErrors | VideoViewModel>) => {
+  const errors = inputValidation(req.body);
 
   if (!errors) {
 
@@ -48,7 +51,7 @@ export const postVideoController = (req: Request, res: Response) => {
   }
 };
 
-export const putVideoController = (req: Request, res: Response) => {
+export const putVideoController = (req: RequestWithPrams<{ id: string }>, res: Response<IErrors>) => {
   const id = Number(req.params.id);
   const errors = inputValidation(req.body);
 
@@ -65,14 +68,14 @@ export const putVideoController = (req: Request, res: Response) => {
   }
 };
 
-export const deleteVideoController = (req: Request, res: Response) => {
+export const deleteVideoController = (req: RequestWithPrams<{ id: string }>, res: Response) => {
   const id = Number(req.params.id);
   const updated = db.deleteVideo(id);
 
   if (updated) {
-    res.sendStatus(HTTP_STATUSES.NO_CONTENT_204)
+    res.sendStatus(HTTP_STATUSES.NO_CONTENT_204);
   } else {
-    res.sendStatus(HTTP_STATUSES.NOT_FOUND_404)
+    res.sendStatus(HTTP_STATUSES.NOT_FOUND_404);
   }
 };
 
