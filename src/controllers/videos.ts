@@ -17,9 +17,9 @@ export const getVideoByIDController = (req: Request, res: Response<IVideo | numb
   const video = db.getVideo(Number(id));
 
   if (video) {
-    res.status(200).send(video);
+    res.status(200).json(video);
   } else {
-    res.send(404);
+    res.sendStatus(404);
   }
 };
 
@@ -41,9 +41,9 @@ export const postVideoController = (req: Request, res: Response) => {
 
     db.addVideo(newVideo);
 
-    res.status(201).send(newVideo);
+    res.status(201).json(newVideo);
   } else {
-    res.status(400).send(errors);
+    res.status(400).json(errors);
   }
 };
 
@@ -60,7 +60,7 @@ export const putVideoController = (req: Request, res: Response) => {
       res.sendStatus(404);
     }
   } else {
-    res.status(400).send(errors);
+    res.status(400).json(errors);
   }
 };
 
